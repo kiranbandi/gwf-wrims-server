@@ -1,0 +1,60 @@
+define C1 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C2 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C3 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C4 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C5 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C6 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C7 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C8 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C9 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C10 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C11 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+
+/*define C11_flow_level1 {select level1 from channel_level where chan=11, month=month}
+define C11_min {lower 0 upper C11_flow_level1 kind 'FLOW-CHANNEL-ZONE' units 'CFS'}
+goal C11_level1 {C11_min < C11_flow_level1}
+define C11 {lower 0 upper C11_flow_level1 kind 'FLOW-CHANNEL' units 'CFS'}
+define C11_Rest {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+goal C11total {C11 = C11_min + C11_Rest}*/
+
+define C12 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C13 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C14 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C15 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C16 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+
+define C17_flow_level1 {select level1 from channel_level where chan=17, month=month}
+define C17_min {lower 0 upper C17_flow_level1 kind 'FLOW-CHANNEL-ZONE' units 'CFS'}
+goal C17_level1 {C17_min < C17_flow_level1}
+define C17 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C17_Rest {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+goal C17total {C17 = C17_min + C17_Rest}
+
+
+define C18 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C19 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+
+define C20_flow_level1 {select level1 from channel_level where chan=20, month=month}
+define C20_min {lower 0 upper C20_flow_level1 kind 'FLOW-CHANNEL-ZONE' units 'CFS'}
+goal C20_level1 {C20_min < C20_flow_level1}
+define C20 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C20_Rest {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+goal C20total {C20 = C20_min + C20_Rest}
+
+define C21 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+
+
+
+define C22_flow_level1 {value 18}
+define C22_min {lower 0 upper C22_flow_level1 kind 'FLOW-CHANNEL-ZONE' units 'CFS'}
+goal C22_level1 {C22_min < C22_flow_level1}
+define C22 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C22_Rest {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+goal C22total {C22 = C22_min + C22_Rest}
+
+define C23_flow_level1 {select level1 from channel_level where chan=23, month=month}
+define C23_min {lower 0 upper C23_flow_level1 kind 'FLOW-CHANNEL-ZONE' units 'CFS'}
+goal C23_level1 {C23_min < C23_flow_level1}
+define C23 {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+define C23_Rest {lower 0 upper 176550 kind 'FLOW-CHANNEL' units 'CFS'}
+goal C23total {C23 = C23_min + C23_Rest}

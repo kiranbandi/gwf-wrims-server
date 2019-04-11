@@ -1,0 +1,9 @@
+
+define I1{timeseries kind 'INFLOW' units 'CFS'}
+define I2{timeseries kind 'INFLOW' units 'CFS'}
+define I3{timeseries kind 'INFLOW' units 'CFS'}
+define I4{timeseries kind 'INFLOW' units 'CFS'}
+define I5{timeseries kind 'INFLOW' units 'CFS'}
+define I6{timeseries kind 'INFLOW' units 'CFS'}
+define I7{timeseries kind 'INFLOW' units 'CFS'}
+define I8{timeseries kind 'INFLOW' units 'CFS'}

@@ -1,0 +1,163 @@
+!Irrigation
+define demand_D1{select demand from irrigation_demand where month=month, channel = 1}
+define D1 {lower 0 upper demand_D1 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D2{select demand from irrigation_demand where month=month, channel = 2}
+define D2 {lower 0 upper demand_D2 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D3{select demand from irrigation_demand where month=month, channel = 3}
+define D3 {lower 0 upper demand_D3 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D4{select demand from irrigation_demand where month=month, channel = 4}
+define D4 {lower 0 upper demand_D4 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D5{select demand from irrigation_demand where month=month, channel = 5}
+define D5 {lower 0 upper demand_D5 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D6{select demand from irrigation_demand where month=month, channel = 6}
+define D6 {lower 0 upper demand_D6 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D7{select demand from irrigation_demand where month=month, channel = 7}
+define D7 {lower 0 upper demand_D7 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D8{select demand from irrigation_demand where month=month, channel = 8}
+define D8 {lower 0 upper demand_D8 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D9{select demand from irrigation_demand where month=month, channel = 9}
+define D9 {lower 0 upper demand_D9 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D10{select demand from irrigation_demand where month=month, channel = 10}
+define D10 {lower 0 upper demand_D10 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D11{select demand from irrigation_demand where month=month, channel = 11}
+define D11 {lower 0 upper demand_D11 kind 'FLOW-DELIVERY' units 'CFS'}
+
+
+!Major Demands
+define demand_D12{select demand from major_demand where month=month, channel = 12}
+define D12 {lower 0 upper demand_D12 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D13{select demand from major_demand where month=month, channel = 13}
+define D13 {lower 0 upper demand_D13 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D14{select demand from major_demand where month=month, channel = 14}
+define D14 {lower 0 upper demand_D14 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D15{select demand from major_demand where month=month, channel = 15}
+define D15 {lower 0 upper demand_D15 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D16{select demand from major_demand where month=month, channel = 16}
+define D16 {lower 0 upper demand_D16 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D17{select demand from major_demand where month=month, channel = 17}
+define D17 {lower 0 upper demand_D17 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D18{select demand from major_demand where month=month, channel = 18}
+define D18 {lower 0 upper demand_D18 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D19{select demand from major_demand where month=month, channel = 19}
+define D19 {lower 0 upper demand_D19 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D20{select demand from major_demand where month=month, channel = 20}
+define D20 {lower 0 upper demand_D20 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D21{select demand from major_demand where month=month, channel = 21}
+define D21 {lower 0 upper demand_D21 kind 'FLOW-DELIVERY' units 'CFS'}
+
+
+!Lake demand
+
+define demand_D22{select demand from lake_demand where month=month, channel = 22}
+define D22 {lower 0 upper demand_D22 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D23{select demand from lake_demand where month=month, channel = 23}
+define D23 {lower 0 upper demand_D23 kind 'FLOW-DELIVERY' units 'CFS'}
+
+
+!diversion channels
+define maxdiv_D25{select level1 from max_diversion where chan=25,month=month}
+define maxdiv_D24{select level1 from max_diversion where chan=24,month=month}
+
+define D24 {lower 0 upper maxdiv_D24 kind 'FLOW-DELIVERY' units 'CFS'}
+define D25 {lower 0 upper maxdiv_D25 kind 'FLOW-DELIVERY' units 'CFS'}
+define D26 {lower 0 upper maxdiv_D25 kind 'FLOW-DELIVERY' units 'CFS'}
+define D27 {lower 0 upper maxdiv_D25 kind 'FLOW-DELIVERY' units 'CFS'}
+
+ 
+/* 
+!irrigation
+define demand_D17{timeseries kind 'IRRIGATION' units 'CFS'}
+define D17 {lower 0 upper demand_D17 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D19{timeseries kind 'IRRIGATION' units 'CFS'}
+define D19 {lower 0 upper demand_D19 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D8{timeseries kind 'IRRIGATION' units 'CFS'}
+define D8 {lower 0 upper demand_D8 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D10{timeseries kind 'IRRIGATION' units 'CFS'}
+define D10 {lower 0 upper demand_D10 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D11{timeseries kind 'IRRIGATION' units 'CFS'}
+define D11 {lower 0 upper demand_D11 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D16{timeseries kind 'IRRIGATION' units 'CFS'}
+define D16 {lower 0 upper demand_D16 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D22{timeseries kind 'IRRIGATION' units 'CFS'}
+define D22 {lower 0 upper demand_D22 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D30{timeseries kind 'IRRIGATION' units 'CFS'}
+define D30 {lower 0 upper demand_D30 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D31{timeseries kind 'IRRIGATION' units 'CFS'}
+define D31 {lower 0 upper demand_D31 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D32{timeseries kind 'IRRIGATION' units 'CFS'}
+define D32 {lower 0 upper demand_D32 kind 'FLOW-DELIVERY' units 'CFS'}
+
+!major demand
+
+define demand_D18{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D18 {lower 0 upper demand_D18 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D20{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D20 {lower 0 upper demand_D20 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D6{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D6 {lower 0 upper demand_D6 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D7{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D7 {lower 0 upper demand_D7 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D9{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D9 {lower 0 upper demand_D9 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D12{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D12 {lower 0 upper demand_D12 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D13{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D13 {lower 0 upper demand_D13 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D3{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D3 {lower 0 upper demand_D3 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D4{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D4 {lower 0 upper demand_D4 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D33{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D33 {lower 0 upper demand_D33 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D34{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D34 {lower 0 upper demand_D34 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define demand_D21{timeseries kind 'MAJOR-DEMAND' units 'CFS'}
+define D21 {lower 0 upper demand_D21 kind 'FLOW-DELIVERY' units 'CFS'}
+
+
+define maxdiv_D2{select flow from diversion_flows where channel=2,month=month}
+define maxdiv_D5{select flow from diversion_flows where channel=5,month=month}
+define D2 {lower 0 upper maxdiv_D2 kind 'FLOW-DELIVERY' units 'CFS'}
+define D5 {lower 0 upper maxdiv_D5 kind 'FLOW-DELIVERY' units 'CFS'}
+
+define D1 {lower 0 upper 176550 kind 'FLOW-DELIVERY' units 'CFS'}*/

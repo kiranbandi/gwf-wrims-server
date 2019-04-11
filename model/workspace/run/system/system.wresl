@@ -1,0 +1,12 @@
+
+! THIS FILE CONTAINS THE NAMES OF ALL INCLUDE FILES FOR THE SYSTEM DESCRIPTION
+
+INCLUDE 'Inflow-table.wresl'
+INCLUDE 'Channel-table.wresl'
+INCLUDE 'Delivery-table.wresl'
+INCLUDE 'Return-table.wresl'
+INCLUDE 'Reservoir-table.wresl'
+INCLUDE 'Connectivity-table.wresl'
+INCLUDE 'Weight-table.wresl'
+
+

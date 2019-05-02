@@ -1,0 +1,28 @@
+{
+    "name": "gwf-wrims-server",
+    "version": "1.0.0",
+    "description": "NodeJS Rest API backend for WRIMS UI",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "keywords": [
+        "wrims",
+        "water model",
+        "simulation"
+    ],
+    "author": "kiranbandi",
+    "license": "MIT",
+    "dependencies": {
+        "app-root-path": "^2.1.0",
+        "body-parser": "^1.18.3",
+        "express": "^4.16.3",
+        "morgan": "^1.9.0",
+        "promise": "^8.0.1",
+        "shelljs": "^0.8.2",
+        "winston": "^3.0.0"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.3"
+    }
+}

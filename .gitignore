@@ -79,3 +79,6 @@ typings/
 # Ignore log files
 logs/
 # next.js build output
+
+# config file
+config.js

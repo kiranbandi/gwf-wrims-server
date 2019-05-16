@@ -1,37 +1,39 @@
 const express = require('express');
-var app = express();
 var morgan = require('morgan');
-var winston = require('./winston');
-const exec = require('child_process').exec;
+var winston = require('./helpers/winston');
+const bodyParser = require('body-parser');
+const errorHandler = require('./helpers/errorHandler');
+var jwt = require('./helpers/jwt');
+
+// Initialise the express app
+var app = express();
 
 // Use morgan for logging Requests , combined along with log outputs from winston
 app.use(morgan('combined', { stream: winston.stream }));
 
+// Setting response headers to be used for all API endpoints
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, authorization');
+    next();
+});
+
 // Start the server 
 app.listen(8443, function() { winston.info("Server Live on Port 8443") })
 
+// Attach data from API call to request object body
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
+app.use(bodyParser.json({ limit: '50mb' }));
 
-function readFile(filePath) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(filePath, 'utf8', (err, contents) => {
-            if (err) { reject(err) } else { resolve(contents) };
-        });
-    });
-}
+// use JWT auth to secure the api
+app.use(jwt());
 
-app.get('/run-simulation', function(req, res) {
-    // Setting response headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+// api route for google authentication
+app.use('/api/auth', require('./auth'))
 
-    // Execute the script 
-    var script = exec('sh process.sh', (error) => { if (error !== null) { console.log(error) } });
+//  api route for simulation model 
+app.use('/api/model', require('./simulation'))
 
-    script.on('close', () => {
-        res.end("Simulation run successfully");
-    });
-
-});
+// global error handler
+app.use(errorHandler);

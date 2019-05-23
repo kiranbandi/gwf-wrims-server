@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
 });
 
 // Start the server 
-app.listen(8443, function() { winston.info("Server Live on Port 8443") })
+app.listen(8081, function() { winston.info("Server Live on Port 8081") })
 
 // Attach data from API call to request object body
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
@@ -29,8 +29,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 // use JWT auth to secure the api
 app.use(jwt());
 
-// api route for google authentication
-app.use('/api/auth', require('./auth'))
+// api route for authentication
+app.use('/api/auth', require('./authenticate'))
 
 //  api route for simulation model 
 app.use('/api/model', require('./simulation'))

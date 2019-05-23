@@ -1,4 +1,4 @@
-var logger = require('winston');
+var logger = require('./winston');
 
 function errorHandler(err, req, res, next) {
 

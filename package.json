@@ -4,7 +4,8 @@
     "description": "NodeJS Rest API backend for WRIMS UI",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon app.js"
+        "start": "nodemon app.js",
+        "start-dev": "nodemon --inspect-brk app.js"
     },
     "keywords": [
         "wrims",
@@ -15,18 +16,19 @@
     "license": "MIT",
     "dependencies": {
         "app-root-path": "^2.1.0",
+        "axios": "^0.18.0",
         "body-parser": "^1.18.3",
         "express": "^4.16.3",
         "express-jwt": "^5.3.1",
-        "jsonwebtoken": "^8.4.0",
-        "morgan": "^1.9.0",
-        "promise": "^8.0.1",
-        "shelljs": "^0.8.2",
-        "winston": "^3.0.0",
+        "jsonwebtoken": "^8.5.1",
         "lodash": "^4.17.11",
         "moment": "^2.24.0",
+        "morgan": "^1.9.0",
         "passport": "^0.4.0",
-        "passport-google-token": "^0.1.2"
+        "passport-google-token": "^0.1.2",
+        "promise": "^8.0.1",
+        "shelljs": "^0.8.2",
+        "winston": "^3.0.0"
     },
     "devDependencies": {
         "nodemon": "^1.18.3",

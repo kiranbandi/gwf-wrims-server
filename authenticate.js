@@ -7,12 +7,11 @@ require('./helpers/passport')();
 
 router.route('/google-login')
     .post(passport.authenticate('google-token', { session: false }), function(req, res, next) {
-        debugger;
-        var email = req.user ? req.user._json.email : '';
         if (!req.user) {
             return res.send(401, 'User Not Authenticated');
         }
-        req.auth = { id: req.user.id };
+        const username = req.user.name.givenName || req.user.name.familyName;
+        req.auth = { username };
         next();
     }, generateToken, sendToken);
 

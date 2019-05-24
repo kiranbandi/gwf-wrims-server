@@ -35,5 +35,8 @@ app.use('/api/auth', require('./authenticate'))
 //  api route for simulation model 
 app.use('/api/model', require('./simulation'))
 
+//  api route for simulation model 
+app.use('/api/dss', require('./dssBouncer'))
+
 // global error handler
 app.use(errorHandler);

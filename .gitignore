@@ -82,3 +82,8 @@ logs/
 
 # config file
 config.js
+
+# ignore workspace files
+model/workspace/dss/*.dsc
+model/workspace/dss/*.dsd
+model/workspace/dss/*.dsk

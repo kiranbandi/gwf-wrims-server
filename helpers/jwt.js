@@ -9,7 +9,9 @@ function jwt() {
         path: [
             // public routes that don't require authentication
             '/api/auth/google-login',
-            '/api/auth/paws-login'
+            '/api/auth/paws-login',
+            '/api/dss/get-catalog',
+            '/api/dss/get-pathdata'
         ]
     });
 }

@@ -1,6 +1,7 @@
 from vtools.datastore.dss.api import *
 import pandas as pd
 import traceback
+import json
 from flask import Flask,request,abort, jsonify,json
 
 dss_filename = "../model/workspace/dss/saskSV.dss"
@@ -31,7 +32,7 @@ def read_pathdata():
         if(('a' in params) and ('b' in params) and ('c' in params)):
             selector_path = 'A='+params['a']+" B="+params['b']+" C="+params['c']
             time_series = dss_retrieve_ts(dss_filename,str(selector_path))
-            return str(time_series.data[:10])
+            return str(time_series.data)
         else:
             return bad_request('Invalid arguments')
     except:

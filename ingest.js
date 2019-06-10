@@ -9,7 +9,7 @@ async function createMultiple(recordsList) {
     return await Record.collection.insert(recordsList);
 }
 
-const model = 'highwood';
+const model = 'southSask';
 const rootPath = 'modsim-data/' + model + '/';
 
 // make promise version of fs.readFile()

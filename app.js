@@ -38,5 +38,8 @@ app.use('/api/model', require('./simulation'))
 //  api route for simulation model 
 app.use('/api/dss', require('./dssBouncer'))
 
+//  api route for simulation model 
+app.use('/api/records', require('./records/record.controller'));
+
 // global error handler
 app.use(errorHandler);

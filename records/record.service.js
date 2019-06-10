@@ -2,10 +2,9 @@ const db = require('../helpers/db');
 const Record = db.Record;
 
 module.exports = {
-    createMultiple
+    getRecords
 };
 
-
-async function createMultiple(recordsList) {
-    return await Record.collection.insert(recordsList);
+async function getRecords(modelID, threshold, number, type) {
+    return await Record.find({ modelID, threshold, number, type });
 }

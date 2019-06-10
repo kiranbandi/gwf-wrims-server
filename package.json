@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "nodemon app.js",
-        "start-dev": "nodemon --inspect-brk app.js"
+        "start-dev": "nodemon --inspect-brk app.js",
+        "start-ingest": "node ingest.js"
     },
     "keywords": [
         "wrims",
@@ -23,7 +24,9 @@
         "jsonwebtoken": "^8.5.1",
         "lodash": "^4.17.11",
         "moment": "^2.24.0",
+        "mongoose": "^5.5.14",
         "morgan": "^1.9.0",
+        "nedb": "^1.8.0",
         "passport": "^0.4.0",
         "passport-google-token": "^0.1.2",
         "promise": "^8.0.1",

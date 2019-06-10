@@ -2,6 +2,7 @@ const db = require('./helpers/db');
 const _ = require('lodash');
 const Record = db.Record;
 var fs = require('fs');
+var moment = require('moment');
 
 timeseries = [];
 
@@ -79,7 +80,7 @@ function parseDemand(data, modelID, threshold) {
             'threshold': threshold
         });
     }
-    return tempStore;
+    return chunkWeeksIntoMonths(tempStore);
 }
 
 function parseInflow(data, modelID, threshold) {
@@ -97,7 +98,7 @@ function parseInflow(data, modelID, threshold) {
             'threshold': threshold
         });
     }
-    return tempStore;
+    return chunkWeeksIntoMonths(tempStore);
 }
 
 function parseReservoir(data, modelID, threshold) {
@@ -118,7 +119,7 @@ function parseReservoir(data, modelID, threshold) {
             'threshold': threshold
         });
     }
-    return tempStore;
+    return chunkWeeksIntoMonths(tempStore);
 }
 
 function parseLinks(data, modelID, threshold) {
@@ -136,5 +137,42 @@ function parseLinks(data, modelID, threshold) {
             'threshold': threshold
         });
     }
+    return chunkWeeksIntoMonths(tempStore);
+}
+
+function chunkWeeksIntoMonths(data) {
+
+    var tempStore = [];
+
+    var groupedByNumber = _.groupBy(data, (d) => d.number);
+
+    _.map(groupedByNumber, (records) => {
+
+        let currentMonth = '01',
+            accumulator = 0,
+            timestamp = records[0].timestamp,
+            number = records[0].number,
+            modelID = records[0].modelID,
+            threshold = records[0].threshold,
+            type = records[0].type,
+            count = 0;
+
+        _.map(records, (record) => {
+            month = record.timestamp.split("/")[0];
+            if (month == currentMonth) {
+                accumulator += Math.round(Number(record.flow) * 100) / 100;
+                count += 1;
+            } else {
+                tempStore.push({ number, modelID, threshold, type, timestamp, flow: accumulator / count });
+                // reset timestamp and accumulator and count
+                accumulator = Math.round(Number(record.flow) * 100) / 100;
+                count = 1;
+                currentMonth = month;
+                timestamp = record.timestamp;
+            }
+        });
+    });
+
     return tempStore;
+
 }

@@ -53,9 +53,9 @@ fs.readFileAsync(rootPath + 'timesteps.csv')
     .then((data) => fs.readFileAsync(rootPath + 'reservoir_base.csv'))
     .then((data) => createMultiple(parseReservoir(data, model, 'base')))
     .then((data) => fs.readFileAsync(rootPath + 'reservoir_five.csv'))
-    .then((data) => createMultiple(parseReservoir(data, model, 'base')))
+    .then((data) => createMultiple(parseReservoir(data, model, 'five')))
     .then((data) => fs.readFileAsync(rootPath + 'reservoir_ten.csv'))
-    .then((data) => createMultiple(parseReservoir(data, model, 'base')))
+    .then((data) => createMultiple(parseReservoir(data, model, 'ten')))
     .then((data) => {
         console.log("all records ingested without any errors for model -", model);
     })

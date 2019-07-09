@@ -5,8 +5,7 @@
     "main": "app.js",
     "scripts": {
         "start": "nodemon app.js",
-        "start-dev": "nodemon --inspect-brk app.js",
-        "start-ingest": "nodemon --inspect ingest.js"
+        "start-dev": "nodemon --inspect-brk app.js"
     },
     "keywords": [
         "wrims",

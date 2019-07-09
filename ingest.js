@@ -119,7 +119,7 @@ function parseReservoir(data, modelID, threshold) {
             'threshold': threshold
         });
     }
-    return chunkWeeksIntoMonths(tempStore);
+    return chunkWeeksIntoMonths(tempStore, true);
 }
 
 function parseLinks(data, modelID, threshold) {
@@ -140,7 +140,7 @@ function parseLinks(data, modelID, threshold) {
     return chunkWeeksIntoMonths(tempStore);
 }
 
-function chunkWeeksIntoMonths(data) {
+function chunkWeeksIntoMonths(data, isPowerPresent = false) {
 
     var tempStore = [];
 
@@ -155,17 +155,19 @@ function chunkWeeksIntoMonths(data) {
             modelID = records[0].modelID,
             threshold = records[0].threshold,
             type = records[0].type,
-            count = 0;
-
+            count = 0,
+            powerAccumulator = 0;
         _.map(records, (record) => {
             month = record.timestamp.split("/")[0];
             if (month == currentMonth) {
-                accumulator += Math.round(Number(record.flow) * 100) / 100;
+                accumulator += roundToNDecimals(record.flow);
+                if (isPowerPresent) { powerAccumulator += roundToNDecimals(record.power) };
                 count += 1;
             } else {
-                tempStore.push({ number, modelID, threshold, type, timestamp, flow: accumulator / count });
-                // reset timestamp and accumulator and count
-                accumulator = Math.round(Number(record.flow) * 100) / 100;
+                tempStore.push({ number, modelID, threshold, type, timestamp, power: roundToNDecimals(powerAccumulator / count), flow: roundToNDecimals(accumulator / count) })
+                    // reset timestamp and accumulator and count
+                accumulator = roundToNDecimals(record.flow);
+                if (isPowerPresent) { powerAccumulator = roundToNDecimals(record.power) };
                 count = 1;
                 currentMonth = month;
                 timestamp = record.timestamp;
@@ -175,4 +177,12 @@ function chunkWeeksIntoMonths(data) {
 
     return tempStore;
 
+}
+
+function roundToNDecimals(value, decimals = 2) {
+    let rounder = 1;
+    for (let i = 1; i <= decimals; i++) {
+        rounder *= 10;
+    }
+    return Math.round(Number(value) * rounder) / rounder
 }

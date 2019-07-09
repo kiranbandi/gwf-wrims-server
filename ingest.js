@@ -164,8 +164,12 @@ function chunkWeeksIntoMonths(data, isPowerPresent = false) {
                 if (isPowerPresent) { powerAccumulator += roundToNDecimals(record.power) };
                 count += 1;
             } else {
-                tempStore.push({ number, modelID, threshold, type, timestamp, power: roundToNDecimals(powerAccumulator / count), flow: roundToNDecimals(accumulator / count) })
-                    // reset timestamp and accumulator and count
+                if (isPowerPresent) {
+                    tempStore.push({ number, modelID, threshold, type, timestamp, power: roundToNDecimals(powerAccumulator / count), flow: roundToNDecimals(accumulator / count) })
+                } else {
+                    tempStore.push({ number, modelID, threshold, type, timestamp, flow: roundToNDecimals(accumulator / count) })
+                }
+                // reset timestamp and accumulator and count
                 accumulator = roundToNDecimals(record.flow);
                 if (isPowerPresent) { powerAccumulator = roundToNDecimals(record.power) };
                 count = 1;

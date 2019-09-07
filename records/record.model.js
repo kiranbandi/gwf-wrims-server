@@ -8,7 +8,8 @@ const schema = new Schema({
     type: { type: String, required: true },
     power: { type: String, required: false },
     modelID: { type: String, required: true },
-    threshold: { type: String, required: true }
+    threshold: { type: String, required: true },
+    condition: { type: String, required: true }
 });
 
 schema.set('toJSON', { virtuals: true });

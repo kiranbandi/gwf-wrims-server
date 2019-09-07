@@ -11,9 +11,9 @@ module.exports = router;
 
 function getRecords(req, res, next) {
     //  this comes unwrapped from the JWT token
-    let { modelID, threshold, number, type } = req.body;
+    let { modelID, threshold, number, condition, type } = req.body;
 
-    recordService.getRecords(modelID, threshold, number, type)
+    recordService.getRecords(modelID, threshold, condition, number, type)
         .then(records => res.json(records))
         .catch(err => next(err));
 }

@@ -2,7 +2,6 @@ const db = require('./helpers/db');
 const _ = require('lodash');
 const Record = db.Record;
 var fs = require('fs');
-var moment = require('moment');
 
 timeseries = [];
 
@@ -31,32 +30,48 @@ fs.readFileAsync(rootPath + 'timesteps.csv')
         timeseries = _.map(data.split("\n").slice(1, data.split("\n").length - 1), (d) => d.split(",")[1].split(" ")[0]);
         return fs.readFileAsync(rootPath + 'demand_base.csv');
     })
-    .then((data) => createMultiple(parseDemand(data, model, 'base')))
-    .then((data) => fs.readFileAsync(rootPath + 'demand_five.csv'))
-    .then((data) => createMultiple(parseDemand(data, model, 'five')))
-    .then((data) => fs.readFileAsync(rootPath + 'demand_ten.csv'))
-    .then((data) => createMultiple(parseDemand(data, model, 'ten')))
+    .then((data) => createMultiple(parseDemand(data, model, 'base', 'base')))
+    .then((data) => fs.readFileAsync(rootPath + 'demand_five_increase.csv'))
+    .then((data) => createMultiple(parseDemand(data, model, 'five', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'demand_ten_increase.csv'))
+    .then((data) => createMultiple(parseDemand(data, model, 'ten', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'demand_five_decrease.csv'))
+    .then((data) => createMultiple(parseDemand(data, model, 'five', 'decrease')))
+    .then((data) => fs.readFileAsync(rootPath + 'demand_ten_decrease.csv'))
+    .then((data) => createMultiple(parseDemand(data, model, 'ten', 'decrease')))
     // start parsing and storing inflow 
     .then((data) => fs.readFileAsync(rootPath + 'inflow_base.csv'))
-    .then((data) => createMultiple(parseInflow(data, model, 'base')))
-    .then((data) => fs.readFileAsync(rootPath + 'inflow_five.csv'))
-    .then((data) => createMultiple(parseInflow(data, model, 'five')))
-    .then((data) => fs.readFileAsync(rootPath + 'inflow_ten.csv'))
-    .then((data) => createMultiple(parseInflow(data, model, 'ten')))
+    .then((data) => createMultiple(parseInflow(data, model, 'base', 'base')))
+    .then((data) => fs.readFileAsync(rootPath + 'inflow_five_increase.csv'))
+    .then((data) => createMultiple(parseInflow(data, model, 'five', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'inflow_ten_increase.csv'))
+    .then((data) => createMultiple(parseInflow(data, model, 'ten', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'inflow_five_decrease.csv'))
+    .then((data) => createMultiple(parseInflow(data, model, 'five', 'decrease')))
+    .then((data) => fs.readFileAsync(rootPath + 'inflow_ten_decrease.csv'))
+    .then((data) => createMultiple(parseInflow(data, model, 'ten', 'decrease')))
     // start parsing and storing links
     .then((data) => fs.readFileAsync(rootPath + 'links_base.csv'))
-    .then((data) => createMultiple(parseLinks(data, model, 'base')))
-    .then((data) => fs.readFileAsync(rootPath + 'links_five.csv'))
-    .then((data) => createMultiple(parseLinks(data, model, 'five')))
-    .then((data) => fs.readFileAsync(rootPath + 'links_ten.csv'))
-    .then((data) => createMultiple(parseLinks(data, model, 'ten')))
+    .then((data) => createMultiple(parseLinks(data, model, 'base', 'base')))
+    .then((data) => fs.readFileAsync(rootPath + 'links_five_increase.csv'))
+    .then((data) => createMultiple(parseLinks(data, model, 'five', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'links_ten_increase.csv'))
+    .then((data) => createMultiple(parseLinks(data, model, 'ten', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'links_five_decrease.csv'))
+    .then((data) => createMultiple(parseLinks(data, model, 'five', 'decrease')))
+    .then((data) => fs.readFileAsync(rootPath + 'links_ten_decrease.csv'))
+    .then((data) => createMultiple(parseLinks(data, model, 'ten', 'decrease')))
     // start parsing and storing reservoir info
     .then((data) => fs.readFileAsync(rootPath + 'reservoir_base.csv'))
-    .then((data) => createMultiple(parseReservoir(data, model, 'base')))
-    .then((data) => fs.readFileAsync(rootPath + 'reservoir_five.csv'))
-    .then((data) => createMultiple(parseReservoir(data, model, 'five')))
-    .then((data) => fs.readFileAsync(rootPath + 'reservoir_ten.csv'))
-    .then((data) => createMultiple(parseReservoir(data, model, 'ten')))
+    .then((data) => createMultiple(parseReservoir(data, model, 'base', 'base')))
+    .then((data) => fs.readFileAsync(rootPath + 'reservoir_five_increase.csv'))
+    .then((data) => createMultiple(parseReservoir(data, model, 'five', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'reservoir_ten_increase.csv'))
+    .then((data) => createMultiple(parseReservoir(data, model, 'ten', 'increase')))
+    .then((data) => fs.readFileAsync(rootPath + 'reservoir_five_decrease.csv'))
+    .then((data) => createMultiple(parseReservoir(data, model, 'five', 'decrease')))
+    .then((data) => fs.readFileAsync(rootPath + 'reservoir_ten_decrease.csv'))
+    .then((data) => createMultiple(parseReservoir(data, model, 'ten', 'decrease')))
     .then((data) => {
         console.log("all records ingested without any errors for model -", model);
     })
@@ -65,7 +80,7 @@ fs.readFileAsync(rootPath + 'timesteps.csv')
     })
 
 
-function parseDemand(data, modelID, threshold) {
+function parseDemand(data, modelID, threshold, condition) {
     var dataStore = data.split("\n"),
         line,
         tempStore = [];
@@ -76,14 +91,15 @@ function parseDemand(data, modelID, threshold) {
             'timestamp': timeseries[line[1]],
             'flow': line[2],
             'type': 'demand',
-            'modelID': modelID,
-            'threshold': threshold
+            modelID,
+            threshold,
+            condition
         });
     }
     return chunkWeeksIntoMonths(tempStore);
 }
 
-function parseInflow(data, modelID, threshold) {
+function parseInflow(data, modelID, threshold, condition) {
     var dataStore = data.split("\n"),
         line,
         tempStore = [];
@@ -94,14 +110,15 @@ function parseInflow(data, modelID, threshold) {
             'timestamp': timeseries[line[1]],
             'flow': line[2],
             'type': 'inflow',
-            'modelID': modelID,
-            'threshold': threshold
+            modelID,
+            threshold,
+            condition
         });
     }
     return chunkWeeksIntoMonths(tempStore);
 }
 
-function parseReservoir(data, modelID, threshold) {
+function parseReservoir(data, modelID, threshold, condition) {
     var dataStore = data.split("\n"),
         line,
         tempStore = [];
@@ -115,14 +132,15 @@ function parseReservoir(data, modelID, threshold) {
             // average power
             'power': line[12],
             'type': 'reservoir',
-            'modelID': modelID,
-            'threshold': threshold
+            modelID,
+            threshold,
+            condition
         });
     }
     return chunkWeeksIntoMonths(tempStore, true);
 }
 
-function parseLinks(data, modelID, threshold) {
+function parseLinks(data, modelID, threshold, condition) {
     var dataStore = data.split("\n"),
         line,
         tempStore = [];
@@ -133,8 +151,9 @@ function parseLinks(data, modelID, threshold) {
             'timestamp': timeseries[line[1]],
             'flow': line[2],
             'type': 'link',
-            'modelID': modelID,
-            'threshold': threshold
+            modelID,
+            threshold,
+            condition
         });
     }
     return chunkWeeksIntoMonths(tempStore);

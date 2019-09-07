@@ -6,8 +6,8 @@ module.exports = {
     getRecordsForYear
 };
 
-async function getRecords(modelID, threshold, number, type) {
-    return await Record.find({ modelID, threshold, number, type });
+async function getRecords(modelID, threshold, number, type, condition) {
+    return await Record.find({ modelID, threshold, number, type, condition });
 }
 
 async function getRecordsForYear(modelID, threshold, year = '1990', type = 'demand') {

@@ -87,3 +87,6 @@ config.js
 model/workspace/dss/*.dsc
 model/workspace/dss/*.dsd
 model/workspace/dss/*.dsk
+
+# ignore modsim data folders 
+modsim-data/*

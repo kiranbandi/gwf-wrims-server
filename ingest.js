@@ -6,10 +6,13 @@ var fs = require('fs');
 timeseries = [];
 
 async function createMultiple(recordsList) {
-    return await Record.collection.insert(recordsList);
+    if (recordsList.length > 0) {
+        return await Record.collection.insert(recordsList);
+    } else return;
+
 }
 
-const model = 'highwood';
+const model = 'northSaskSask';
 const rootPath = 'modsim-data/' + model + '/';
 
 // make promise version of fs.readFile()

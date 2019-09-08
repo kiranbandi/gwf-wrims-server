@@ -38,8 +38,10 @@ app.use('/api/auth', require('./authenticate'))
 //  api route for simulation model - no longer in use
 // app.use('/api/dss', require('./dssBouncer'))
 
-//  api route for simulation model 
+//  api route for MODSIM data 
 app.use('/api/records', require('./records/record.controller'));
+//  api route for Custom Map Nodes
+app.use('/api/nodes', require('./nodes/node.controller'));
 
 // global error handler
 app.use(errorHandler);

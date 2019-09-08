@@ -9,7 +9,7 @@ async function createMultiple(recordsList) {
     return await Record.collection.insert(recordsList);
 }
 
-const model = 'southSask';
+const model = 'highwood';
 const rootPath = 'modsim-data/' + model + '/';
 
 // make promise version of fs.readFile()
@@ -92,8 +92,7 @@ function parseDemand(data, modelID, threshold, condition) {
             'flow': line[2],
             'type': 'demand',
             modelID,
-            threshold,
-            condition
+            threshold: threshold + '-' + condition
         });
     }
     return chunkWeeksIntoMonths(tempStore);
@@ -111,8 +110,7 @@ function parseInflow(data, modelID, threshold, condition) {
             'flow': line[2],
             'type': 'inflow',
             modelID,
-            threshold,
-            condition
+            threshold: threshold + '-' + condition
         });
     }
     return chunkWeeksIntoMonths(tempStore);
@@ -133,8 +131,7 @@ function parseReservoir(data, modelID, threshold, condition) {
             'power': line[12],
             'type': 'reservoir',
             modelID,
-            threshold,
-            condition
+            threshold: threshold + '-' + condition
         });
     }
     return chunkWeeksIntoMonths(tempStore, true);
@@ -152,8 +149,7 @@ function parseLinks(data, modelID, threshold, condition) {
             'flow': line[2],
             'type': 'link',
             modelID,
-            threshold,
-            condition
+            threshold: threshold + '-' + condition
         });
     }
     return chunkWeeksIntoMonths(tempStore);

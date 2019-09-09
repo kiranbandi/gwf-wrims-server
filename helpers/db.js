@@ -5,4 +5,5 @@ mongoose.Promise = global.Promise;
 
 module.exports = {
     Record: require('../records/record.model'),
+    Node: require('../nodes/node.model')
 };

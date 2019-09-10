@@ -24,7 +24,7 @@ async function create(nodeParams) {
     // create a new node
     const node = new Node(nodeParams);
     // save node
-    await node.save();
+    return await node.save();
 }
 
 // update a record in the database
@@ -34,12 +34,12 @@ async function update(nodeParams) {
     if (!existingNode) throw Error('Node not found');
 
     node = Object.assign(existingNode, nodeParams);
-    await node.save();
+    return await node.save();
 }
 
 
 // find a node by modelID and number and then delete it
 async function deleteNode(modelID, number) {
     // then delete the actual user record
-    await User.deleteOne({ modelID, number });
+    await Node.deleteOne({ modelID, number });
 }

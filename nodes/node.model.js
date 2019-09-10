@@ -7,7 +7,8 @@ const schema = new Schema({
     modelID: { type: String, required: true },
     note: { type: String, required: false },
     link: { type: String, required: false },
-    gps: { type: String, required: false }
+    latitude: { type: String, required: false },
+    longitude: { type: String, required: false }
 });
 
 schema.set('toJSON', { virtuals: true });

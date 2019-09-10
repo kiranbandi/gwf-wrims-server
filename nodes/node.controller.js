@@ -23,7 +23,7 @@ function getNodes(req, res, next) {
 
 function registerNode(req, res, next) {
     //  this comes unwrapped from the JWT token
-    let { modelID, number, type, note, gps, link = '' } = req.body;
+    let { modelID, number, type, note, latitude, longitude, link = '' } = req.body;
 
     nodeService.create({ modelID, number, type, note, link })
         .then((data) => res.json({ data }))
@@ -32,9 +32,9 @@ function registerNode(req, res, next) {
 
 function updateNode(req, res, next) {
     //  this comes unwrapped from the JWT token
-    let { modelID, number, type, gps, note, link = '' } = req.body;
+    let { modelID, number, type, latitude, longitude, note, link = '' } = req.body;
 
-    nodeService.update({ modelID, number, gps, type, note, link })
+    nodeService.update({ modelID, number, latitude, longitude, type, note, link })
         .then((data) => res.json({ data }))
         .catch(err => next(err));
 }

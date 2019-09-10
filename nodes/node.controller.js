@@ -25,7 +25,7 @@ function registerNode(req, res, next) {
     //  this comes unwrapped from the JWT token
     let { modelID, number, type, note, latitude, longitude, link = '' } = req.body;
 
-    nodeService.create({ modelID, number, type, note, link })
+    nodeService.create({ modelID, number, latitude, longitude, type, note, link })
         .then((data) => res.json({ data }))
         .catch(err => next(err));
 }

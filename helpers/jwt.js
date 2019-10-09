@@ -9,7 +9,13 @@ function jwt() {
         path: [
             // public routes that don't require authentication
             '/api/auth/google-login',
-            '/api/auth/paws-login'
+            '/api/auth/paws-login',
+            // bypassing the following routes 
+            // as the homepage is being made public
+            '/records/flow-data',
+            '/records/yearly-flow-data',
+            '/nodes/get-nodes'
+            // only routes that edit nodes are protected
         ]
     });
 }

@@ -12,9 +12,9 @@ function jwt() {
             '/api/auth/paws-login',
             // bypassing the following routes 
             // as the homepage is being made public
-            'api/records/flow-data',
-            'api/records/yearly-flow-data',
-            'api/nodes/get-nodes'
+            '/api/records/flow-data',
+            '/api/records/yearly-flow-data',
+            '/api/nodes/get-nodes'
             // only routes that edit nodes are protected
         ]
     });

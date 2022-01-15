@@ -29,7 +29,7 @@
         "passport": "^0.4.0",
         "passport-google-token": "^0.1.2",
         "promise": "^8.0.1",
-        "shelljs": "^0.8.2",
+        "shelljs": "^0.8.5",
         "winston": "^3.0.0"
     },
     "devDependencies": {
